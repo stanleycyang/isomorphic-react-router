@@ -8,7 +8,7 @@ const app = require('../app/server')
 const config = require('../config')
 const pkg = require('../package.json')
 
-const port normalizePort(config.port)
+const port = normalizePort(config.port)
 app.set('port', port)
 
 const server = http.createServer(app)
