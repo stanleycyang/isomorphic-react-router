@@ -11,6 +11,11 @@ const database = require('./db/')
 /* start the app */
 const app = express()
 
+/* webpack development */
+if (config.env !== 'production') {
+  require('../../webpack/dev.config').webpackDevConfig(app)
+}
+
 app.use(require('compression')({
   flush: require('zlib').Z_SYNC_FLUSH
 }))
