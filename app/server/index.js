@@ -4,6 +4,7 @@ const path = require('path')
 const config = require('../../config')
 const bodyParser = require('body-parser')
 const express = require('express')
+const home = require('./routes')
 
 /* connect the database */
 const database = require('./db/')
@@ -39,6 +40,8 @@ app.use(require('cookie-parser')())
 app.use(express.static(path.join(__dirname, '../../static'), {
   maxAge: 86400000
 }))
+
+app.use('/', home)
 
 /* catch 404s */
 app.use((req, res, next) => {
