@@ -18,13 +18,6 @@ router.get('*', (req, res, next) => {
       next(err)
     }
 
-    /* 404 */
-    if (!renderProps) {
-      let err = new Error('Not Found')
-      err.static = 404
-      next(err)
-    }
-
     const componentHTML = renderToString(<RoutingContext {...renderProps } />)
 
     const HTML = `
