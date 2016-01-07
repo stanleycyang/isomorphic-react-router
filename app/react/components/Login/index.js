@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-export default class Home extends Component {
+export default class Login extends Component {
   static propTypes = {
 
   }
@@ -9,8 +9,8 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Home</h1>
-        <Link to="/login">Login</Link>
+        <h1>Login</h1>
+        <Link to="/">Home</Link>
       </div>
     )
   }

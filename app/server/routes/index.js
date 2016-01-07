@@ -13,13 +13,35 @@ router.get('*', (req, res, next) => {
   const location = createLocation(req.url)
   match({ routes, location }, (err, redirectLocation, renderProps) => {
     if (err) {
-      console.error(err)
-      return res.status(500).end('Internal server error')
+      let err = new Error('Internal Server Error')
+      err.static = 500
+      next(err)
     }
 
-    if (!renderProps) return res.status(404).end('Not found')
+    /* 404 */
+    if (!renderProps) {
+      let err = new Error('Not Found')
+      err.static = 404
+      next(err)
+    }
 
-    res.send(location)
+    const componentHTML = renderToString(<RoutingContext {...renderProps } />)
+
+    const HTML = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Isomorphic Redux Demo</title>
+          </head>
+          <body>
+            <div id="react-view">${componentHTML}</div>
+            <script type="application/javascript" src="/bundle.js"></script>
+          </body>
+      </html>
+    `
+
+    res.end(HTML)
   })
 })
 
