@@ -12,11 +12,15 @@ const router = Router()
 router.get('*', (req, res, next) => {
   const location = createLocation(req.url)
   match({ routes, location }, (err, redirectLocation, renderProps) => {
+
+    /* Catch 500s */
     if (err) {
       let err = new Error('Internal Server Error')
       err.static = 500
       next(err)
     }
+
+    console.log(renderProps)
 
     const componentHTML = renderToString(<RoutingContext {...renderProps } />)
 
